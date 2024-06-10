@@ -1,0 +1,1 @@
+<h1 class="font-300 font-serif max-w-192 text-12">Contact</h1>

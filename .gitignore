@@ -1,0 +1,6 @@
+.idea/
+.netlify/
+.svelte-kit/
+build/
+node_modules/
+deno.lock
