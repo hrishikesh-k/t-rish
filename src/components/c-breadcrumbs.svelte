@@ -2,7 +2,7 @@
   import CIcon from '~/client/components/c-icon.svelte'
   import {page} from '$app/stores'
 </script>
-<ul class="font-leading-4 flex gap-1 items-center list-none m-0 p-0">
+<ul class="font-leading-4 flex flex-wrap gap-1 items-center list-none m-0 p-0">
   {#each $page.data.breadcrumbs as breadcrumb, i}
     <li>
       <a class="hover:bg-blue-100 box-border border-rounded-2 decoration-none flex gap-1 items-center text-current p-2 transition-duration-240" href="{breadcrumb.href}">

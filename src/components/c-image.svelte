@@ -1,4 +1,6 @@
 <script lang="ts">
+  import {browser} from '$app/environment'
+  import LazyLoad from 'vanilla-lazyload'
   import {page} from '$app/stores'
   export let max_width : number = 1200
   export let name : keyof typeof $page.data.resources
@@ -10,18 +12,20 @@
     1200
   ]
   function generate_image_cdn_url(w : number) {
-    return `/.netlify/images?url=${src}&w=${w}`
+    return `/.netlify/images?url=${image.src}&w=${w}`
   }
   function lt_max_width(num : number) {
     return num < max_width
   }
-  $: alt = $page.data.resources[name].alt
+  $: image = $page.data.resources[name]
   $: widths = preset_widths.filter(lt_max_width).concat([
     max_width
   ])
-  $: src = $page.data.resources[name].src
+  if (browser) {
+    new LazyLoad()
+  }
 </script>
-<picture>
+<picture class="block overflow-hidden">
   <!--
     The logic for the following block is as follows:
       - For each width of the generated widths array, do the following:
@@ -39,13 +43,23 @@
   {#each widths as width, i}
     {#if i === widths.length - 1}
       {#if widths.length > 1}
-        <source media="(min-width: {widths[i - 1]}px)" srcset="{generate_image_cdn_url(width)}"/>
+        <source data-srcset="{generate_image_cdn_url(width)}" media="(min-width: {widths[i - 1]}px)"/>
       {:else}
-        <source srcset="{generate_image_cdn_url(width)}"/>
+        <source data-srcset="{generate_image_cdn_url(width)}"/>
       {/if}
     {:else}
-      <source media="(max-width: {width}px)" srcset="{generate_image_cdn_url(width)}"/>
+      <source data-srcset="{generate_image_cdn_url(width)}" media="(max-width: {width}px)"/>
     {/if}
   {/each}
-  <img alt="{alt}" class="h-full object-contain w-full" src="{generate_image_cdn_url(64)}"/>
+  <img
+    alt="{image.alt}"
+    class="block h-full lazy object-contain transition-duration-240 w-full"
+    height="{image.height}"
+    src="{generate_image_cdn_url(64)}"
+    width="{image.width}"/>
 </picture>
+<style>
+  .lazy:not(.loaded) {
+    --uno-apply: blur-12;
+  }
+</style>
