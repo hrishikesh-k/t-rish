@@ -1,3 +1,4 @@
+import img1 from '~/client/routes/assets/img-1.png?meta'
 import type {LayoutLoad} from './$types'
 export const load : LayoutLoad = () => {
   return {
@@ -7,7 +8,12 @@ export const load : LayoutLoad = () => {
       name: 'Home'
     }],
     description: 'Home',
-    resources: {},
+    resources: {
+      img1: {
+        alt: '',
+        ...img1,
+      }
+    },
     title: 'T-Rish'
   }
 }

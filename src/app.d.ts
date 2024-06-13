@@ -1,4 +1,5 @@
-import {icons} from '~/client/components/c-icon.svelte'
+import {c_icons} from '~/client/components/c-icon.svelte'
+import type {ILazyLoadInstance} from 'vanilla-lazyload'
 declare global {
   declare module '*?meta' {
     export default {} as {
@@ -11,7 +12,7 @@ declare global {
     interface PageData {
       breadcrumbs : Array<{
         href : string
-        icon : keyof typeof icons
+        icon : keyof typeof c_icons
         name : string
       }>
       description : string
@@ -23,6 +24,9 @@ declare global {
       }>
       title : string
     }
+  }
+  interface Window {
+    ll : ILazyLoadInstance
   }
 }
 export {}

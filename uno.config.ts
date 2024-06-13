@@ -13,9 +13,14 @@ export default defineConfig({
     presetUno()
   ],
   theme: {
+    colors: {
+      orange: '#fb5605',
+      peach: '#f59f76',
+      yellow: '#f9d059'
+    },
     fontFamily: {
-      sans: '\'Noto Sans\', sans-serif',
-      serif: '\'Noto Serif\', serif'
+      'h-01': '\'Helvetica W01 Light\', sans-serif',
+      'h-04': '\'Helvetica LT W04 Roman\', sans-serif'
     },
     preflightRoot: '*'
   },

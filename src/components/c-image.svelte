@@ -1,6 +1,5 @@
 <script lang="ts">
-  import {browser} from '$app/environment'
-  import LazyLoad from 'vanilla-lazyload'
+  import {onMount} from 'svelte'
   import {page} from '$app/stores'
   export let max_width : number = 1200
   export let name : keyof typeof $page.data.resources
@@ -21,9 +20,9 @@
   $: widths = preset_widths.filter(lt_max_width).concat([
     max_width
   ])
-  if (browser) {
-    new LazyLoad()
-  }
+  onMount(() => {
+    window.ll.update()
+  })
 </script>
 <picture class="block overflow-hidden">
   <!--
