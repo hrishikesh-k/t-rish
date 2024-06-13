@@ -19,6 +19,9 @@
   },
   "license": "MIT",
   "name": "t-rish",
+  "overrides": {
+    "decompress-response": "9.0.0"
+  },
   "private": true,
   "scripts": {
     "check": "svelte-check",
